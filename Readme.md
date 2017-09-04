@@ -33,8 +33,12 @@ module.exports = config;
 
 ### 文件上传-普通上传
 普通上传在一次操作中将文件上传至网宿云存储，建议仅在文件小于20M时使用普通上传。
-范例
+
+#### 范例
 ```
+const wcs = require("../index");
+const config = require('./config');
+
 let putPolicy = {
     scope: bucket+':'+key,
     deadline: '<deadline>',
@@ -62,8 +66,11 @@ client.uploadByPath(filePath, putPolicy, null, callback);
 2. 使用分片上传时可自定义分块大小，但配置的分块大小必须大于4M且为4M的整数倍。
 3. 使用分片上传时如指定文件保存上传记录，则上传中断后再次上传相同文件会启用断点续传功能。
 
-范例
+#### 范例
 ```
+const wcs = require("../index");
+const config = require('./config');
+
 let putPolicy = {
     scope: bucket+':'+key,
     deadline: '<deadline>',
