@@ -93,3 +93,5 @@ let filePath = __dirname+'/test20M';
 let recordFile = __dirname+'/resume.record';
 client.resumeUploadByPath(filePath, putPolicy, {deadline:3, mimeType: 'application/text', progressCallback: progressCallback}, callback);
 ```
+
+更多范例参考**wcs-nodejs-sdk/demos**
