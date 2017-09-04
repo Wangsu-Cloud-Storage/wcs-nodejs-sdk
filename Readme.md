@@ -11,6 +11,20 @@ npm install wcs-nodejs-sdk
 ```
 npm install
 ```
+### 使用
+如使用npm安装，使用如下require指令
+```
+const wcs = require('wcs-nodejs-sdk');
+
+let client = new wcs.wcsClient(config);
+```
+
+如使用手动安装，则require根目录下的index.js文件
+```
+const wcs = require('wcs-nodejs-sdk/index');
+
+let client = new wcs.wcsClient(config)
+```
 
 ### 配置
 使用wcs-nodejs-sdk之前，您需要
