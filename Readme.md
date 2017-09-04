@@ -50,7 +50,7 @@ module.exports = config;
 
 #### 范例
 ```
-const wcs = require("../index");
+const wcs = require('wcs-nodejs-sdk');
 const config = require('./config');
 
 let putPolicy = {
@@ -82,7 +82,7 @@ client.uploadByPath(filePath, putPolicy, null, callback);
 
 #### 范例
 ```
-const wcs = require("../index");
+const wcs = require('wcs-nodejs-sdk');
 const config = require('./config');
 
 let putPolicy = {
