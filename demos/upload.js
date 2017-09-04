@@ -36,4 +36,10 @@ let filePath = __dirname+'/test10M';
 
 // 若不指定recordFile则不会启用断点续传功能
 let recordFile = __dirname+'/resume.record';
-client.resumeUploadByPath(filePath, putPolicy, {deadline:3, mimeType: 'application/text', progressCallback: progressCallback}, callback);
+let extraParams = {
+    deadline:3,                         // 定义过期时间，单位天
+    mimeType: 'application/text',       // 自定义文件mimeType类型
+    progressCallback: progressCallback, // 分片上传进度回调
+    params: {'x:myVar': 'myvar'},       // 自定义变量
+}
+client.resumeUploadByPath(filePath, putPolicy, extraParams, callback);
