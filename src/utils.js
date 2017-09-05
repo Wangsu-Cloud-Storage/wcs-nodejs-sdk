@@ -106,16 +106,13 @@ class Utils {
       let u = url.parse(uri);
       let signString = u.path;
       signString = signString + '\n';
-      console.log(signString);
 
       if (data) {
         signString += data;
       }
 
       let encodeSign = this.hmacSha1(signString, sk);
-      console.log(encodeSign);
       let safeEncodeSign = this.urlsafeBase64Encode(encodeSign);
-      console.log(safeEncodeSign);
       return ak + ':' + safeEncodeSign;
     }
 }

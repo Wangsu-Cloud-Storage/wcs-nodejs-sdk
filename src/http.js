@@ -15,7 +15,6 @@ class Http {
     }
 
     post(url, form, headers, callback) {
-        console.log(url);
         headers = headers || {};
         headers['User-Agent'] = headers['User-Agent'] || utils.userAgent();
         headers['Connection'] = 'keep-alive';

@@ -152,7 +152,6 @@ class ResumeUploader {
     }
 
     mkblk(uploadToken, blkData, currentBlock, extraParams, callback) {
-        console.log('mkblk');
         let requestURI = "/mkblk/" + blkData.length + "/" + currentBlock;
         let auth = uploadToken;
         let headers = {
