@@ -181,14 +181,14 @@ class ResumeUploader {
             'Content-Type': 'text/plain',
             'UploadBatch' : this.uploadBatch,
         }
-        if (extraParams.key) {
-            headers.Key = utils.urlsafeBase64Encode(extraParams.key);
+        if ('key' in extraParams) {
+            postForm.field('key', extraParams.key);
         }
-        if (extraParams.mimeType) {
-            headers.MimeType = extraParams.mimeType;
+        if ('mimeType' in extraParams) {
+            postForm.field('mimeType', extraParams.mimeType);
         }
-        if (extraParams.deadline) {
-            headers.Deadline = extraParams.deadline;
+        if ('deadline' in extraParams) {
+            postForm.field('deadline', extraParams.deadline);
         }
         let postBody = ctxList.join(",");
         this.sendPost(requestURI, postBody, headers, (err, data, res) => {
