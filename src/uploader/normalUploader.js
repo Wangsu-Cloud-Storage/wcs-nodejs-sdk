@@ -64,13 +64,13 @@ class NormalUploader {
     createRequest(uploadToken, fileStream, extraParams, callback) {
         let postForm = formstream();
         postForm.field('token', uploadToken);
-        if ('key' in extraParams) {
+        if (extraParams.key) {
             postForm.field('key', extraParams.key);
         }
-        if ('mimeType' in extraParams) {
+        if (extraParams.mimeType) {
             postForm.field('mimeType', extraParams.mimeType);
         }
-        if ('deadline' in extraParams) {
+        if (extraParams.deadline) {
             postForm.field('deadline', extraParams.deadline);
         }
 
