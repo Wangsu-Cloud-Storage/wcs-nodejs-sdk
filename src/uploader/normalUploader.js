@@ -30,7 +30,7 @@ class NormalUploader {
         let fileStream = fs.createReadStream(localFile);
 
         if (!extraParams.mimeType) {
-            extraParams.mimeType = mime.lookup(localFile);
+            extraParams.mimeType = mime.getType(localFile);
         }
 
         if (!extraParams.key) {
