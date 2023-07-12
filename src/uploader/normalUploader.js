@@ -9,7 +9,7 @@ const formstream = require('formstream');
 var defaultExtraParams = {
     key: '',
     params: {},
-    mimeType: null,
+    // mimeType: null,
     deadline: null,
 }
 
@@ -29,9 +29,9 @@ class NormalUploader {
         extraParams = utils.extend(defaultExtraParams, extraParams || {});
         let fileStream = fs.createReadStream(localFile);
 
-        if (!extraParams.mimeType) {
-            extraParams.mimeType = mime.lookup(localFile);
-        }
+        // if (!extraParams.mimeType) {
+        //     extraParams.mimeType = mime.getType(localFile);
+        // }
 
         if (!extraParams.key) {
             extraParams.key = path.basename(localFile);
@@ -49,9 +49,9 @@ class NormalUploader {
      */
     stream(uploadToken, fileStream, extraParams, callback) {
         extraParams = utils.extend(defaultExtraParams, extraParams || {});
-        if (!extraParams.mimeType) {
-            extraParams.mimeType = 'application/octet-stream';
-        }
+        // if (!extraParams.mimeType) {
+        //     extraParams.mimeType = 'application/octet-stream';
+        // }
 
         fileStream.on("error", function(err) {
             callback(err, null, null);
@@ -64,13 +64,13 @@ class NormalUploader {
     createRequest(uploadToken, fileStream, extraParams, callback) {
         let postForm = formstream();
         postForm.field('token', uploadToken);
-        if ('key' in extraParams) {
+        if (extraParams.key) {
             postForm.field('key', extraParams.key);
         }
-        if ('mimeType' in extraParams) {
+        if (extraParams.mimeType) {
             postForm.field('mimeType', extraParams.mimeType);
         }
-        if ('deadline' in extraParams) {
+        if (extraParams.deadline) {
             postForm.field('deadline', extraParams.deadline);
         }
 

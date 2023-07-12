@@ -75,12 +75,14 @@ class ResumeUploader {
     createRequest(uploadToken, fileStream, fileSize, extraParams, callback) {
         let blockNumber = fileSize / this.config.BlockSize;
         let totalBlockNumber = (fileSize % this.config.BlockSize == 0) ? blockNumber : (blockNumber + 1);
+        let totalBlock = Math.ceil(blockNumber);
         let finishedBlock = 0;
         let currentBlock = 0;
         let readLength = 0;
         let readBuffers = [];
         let finishedCtxList = [];
         let finishedBlkPutRets = [];
+        let sent = false
         if (extraParams.recordFile) {
             try {
                 let resumeRecords = fs.readFileSync(extraParams.recordFile).toString();
@@ -135,8 +137,9 @@ class ResumeUploader {
                             }
 
                             fileStream.resume();
-                            if (isEnd) {
+                            if (totalBlock === finishedCtxList.length) {
                                 this.mkfile(uploadToken, fileSize, finishedCtxList, extraParams, callback);
+                                sent = true
                             }
                         }
                     });
@@ -145,7 +148,7 @@ class ResumeUploader {
         });
 
         fileStream.on('end', () => {
-            if (!isEnd) {
+            if (!sent && readLength === fileSize) {
                 this.mkfile(uploadToken, fileSize, finishedCtxList, extraParams, callback);
             }
         });
@@ -181,14 +184,14 @@ class ResumeUploader {
             'Content-Type': 'text/plain',
             'UploadBatch' : this.uploadBatch,
         }
-        if ('key' in extraParams) {
-            postForm.field('key', extraParams.key);
+        if (extraParams.key) {
+            headers.Key = utils.urlsafeBase64Encode(extraParams.key);
         }
-        if ('mimeType' in extraParams) {
-            postForm.field('mimeType', extraParams.mimeType);
+        if (extraParams.mimeType) {
+            headers.MimeType = extraParams.mimeType;
         }
-        if ('deadline' in extraParams) {
-            postForm.field('deadline', extraParams.deadline);
+        if (extraParams.deadline) {
+            headers.Deadline = extraParams.deadline;
         }
         let postBody = ctxList.join(",");
         this.sendPost(requestURI, postBody, headers, (err, data, res) => {
