@@ -1,13 +1,11 @@
 const wcsHttp = require('../http');
 const utils = require('../utils');
 const path = require('path');
-const mime = require('mime');
 const fs = require('fs');
 
 let defaultExtraParams = {
     key: '',
     params: {},
-    mimeType: null,
     deadline: null,
     recordFile: null,
     progressCallback: null,
@@ -35,10 +33,6 @@ class ResumeUploader {
         let fileStream = fs.createReadStream(localFile);
         let fileSize = fs.statSync(localFile).size;
 
-        if (!extraParams.mimeType) {
-            extraParams.mimeType = mime.lookup(localFile);
-        }
-
         if (!extraParams.key) {
             extraParams.key = path.basename(localFile);
         }
@@ -60,9 +54,6 @@ class ResumeUploader {
         }
 
         extraParams = utils.extend(defaultExtraParams, extraParams || {});
-        if (!extraParams.mimeType) {
-            extraParams.mimeType = 'application/octet-stream';
-        }
 
         fileStream.on("error", (err) => {
             callback(err, null, null);
