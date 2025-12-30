@@ -1,6 +1,10 @@
-## wcs-nodejs-sdk
+# wcs-nodejs-sdk
 
-### 安装
+## 语言 / Language
+- [简体中文](README.md)
+- [English](README.en.md)
+
+## 安装
 1. npm安装
 ```
 npm install wcs-nodejs-sdk
@@ -11,7 +15,7 @@ npm install wcs-nodejs-sdk
 ```
 npm install
 ```
-### 使用
+## 使用
 如使用npm安装，使用如下require指令
 ```
 const wcs = require('wcs-nodejs-sdk');
@@ -26,10 +30,10 @@ const wcs = require('wcs-nodejs-sdk/index');
 let client = new wcs.wcsClient(config)
 ```
 
-### 配置
+## 配置
 使用wcs-nodejs-sdk之前，您需要
-1. 拥有一对密钥，可在网宿云存储控制台查看
-2. 新建一个空间，可以网宿云存储控制台操作
+1. 拥有一对密钥，可在wcs云存储控制台查看
+2. 新建一个空间，可以wcs云存储控制台操作
 
 执行完以上操作后，在您的项目中创建一个config文件，配置项及定义如下
 ```
@@ -45,10 +49,10 @@ var config = {
 module.exports = config;
 ```
 
-### 文件上传-普通上传
-普通上传在一次操作中将文件上传至网宿云存储，建议仅在文件小于20M时使用普通上传。
+## 文件上传-普通上传
+普通上传在一次操作中将文件上传至wcs云存储，建议仅在文件小于20M时使用普通上传。
 
-#### 范例
+### 范例
 ```
 const wcs = require('wcs-nodejs-sdk');
 const config = require('./config');
@@ -75,12 +79,12 @@ let filePath = __dirname+'/test';
 client.uploadByPath(filePath, putPolicy, null, callback);
 ```
 
-### 文件上传-分片上传
+## 文件上传-分片上传
 1. 当文件较大时，使用普通上传容易出现超时等上传异常。建议在文件大于20M时选择分片上传功能。
 2. 使用分片上传时可自定义分块大小，但配置的分块大小必须大于4M且为4M的整数倍。
 3. 使用分片上传时如指定文件保存上传记录，则上传中断后再次上传相同文件会启用断点续传功能。
 
-#### 范例
+### 范例
 ```
 const wcs = require('wcs-nodejs-sdk');
 const config = require('./config');

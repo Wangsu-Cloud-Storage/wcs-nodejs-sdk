@@ -32,8 +32,8 @@ let client = new wcs.wcsClient(config)
 
 ## Configuration
 Before using wcs-nodejs-sdk, you need to:
-1. Have a pair of keys, which can be viewed in the Wangsu Cloud Storage console
-2. Create a new bucket, which can be operated in the Wangsu Cloud Storage console
+1. Have a pair of keys, which can be viewed in the Wcs Cloud Storage console
+2. Create a new bucket, which can be operated in the Wcs Cloud Storage console
 
 After completing the above operations, create a config file in your project. The configuration items and definitions are as follows:
 ```
@@ -50,7 +50,7 @@ module.exports = config;
 ```
 
 ## File Upload - Simple Upload
-Simple upload uploads the file to Wangsu Cloud Storage in one operation. It is recommended to use simple upload only when the file is less than 20M.
+Simple upload uploads the file to Wcs Cloud Storage in one operation. It is recommended to use simple upload only when the file is less than 20M.
 
 ### Example
 ```
